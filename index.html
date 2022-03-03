@@ -548,7 +548,17 @@ function buildLineChart(data){
         .attr("transform", "rotate(-90)")
         .text("Frequency");
       
-      
+      svg.append("path")
+      .datum(coordinates)
+      .attr("d",line)
+      //.attr("stroke-width", 3)
+      //.attr("stroke", "white")
+      //.attr("fill", "black")
+      //.attr("stroke-opacity", 1)
+      //.attr("fill-opacity", .5);
+      .attr('fill', '#f0dce8')
+      .style("fill-opacity", .7)
+      //.attr("stroke", "black")
   
 
 </script>
