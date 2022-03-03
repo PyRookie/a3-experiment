@@ -479,6 +479,80 @@
     }
 </script>
 
+/*-----------------------Line Chart--------------------------
+** When you need to create a bar chart with a given data set, use
+** buildLineChart(d) where d is the data returned from generateDataset()
+*/
+<script>
+
+function buildLineChart(data){
+
+      // establishing variables
+      var margin = 50,
+      width = 500 - 2 * margin,
+      height = 500 - 2 * margin;
+
+      // creating svg
+      var svg = d3.select("div#vis").append('svg')
+        .attr("width", width + 2 * margin)
+        .attr("height", height + 2 * margin)
+        .attr("transform", "translate(" + margin + ", " + margin + ")")
+
+      var d = data.dataset,
+      mark1 = data.mark1,
+      mark2 = data.mark2;
+      //console.log(d);
+
+      // scaling
+      var xscale = d3.scaleBand()
+        .domain(d.map(function(d){ return (d.letter) }))
+        .range( [0, width])
+        .padding(0.4);
+
+      var yscale = d3.scaleLinear()
+        .domain([0, 105])    //d3.max(d, function(d){return d.frequency;}
+        .range( [height, 0] );
+      console.log(d3.max(d, d.frequency));
+
+      // Add X axis
+      var x_axis = d3.axisBottom()
+        .scale(xscale)
+      svg.append("g")
+        .attr("transform", "translate(" + margin + "," + height + ")")
+        .call(x_axis)
+        .attr("class", "xAxis")
+
+
+      // Add Y axis
+      var y_axis = d3.axisLeft()
+        .scale(yscale)
+        .tickValues([])
+      svg.append("g")
+        .attr("transform", "translate(" + margin + ", 0 )")
+        .call(y_axis)
+        .attr("class", "yAxis")
+
+      // Add X axis label
+      svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", width/2 + margin)
+        .attr("y", height + 40)
+        .text("Letter");
+
+      // Add Y axis label
+      svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", -(height/2))
+        .attr("y", 0)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Frequency");
+      
+      
+  
+
+</script>
+
 <script>
 
     // radar chart
@@ -774,6 +848,11 @@
     }
 
 </script>
+
+
+
+
+
 <!--
   TO DO:
   1）增加折线图
